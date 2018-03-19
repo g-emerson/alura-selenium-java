@@ -1,25 +1,43 @@
 package br.com.caelum.teste;
 
+import static org.junit.Assert.assertTrue;
+
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class UsuarioSystemTest {
-	public static void main(String[] args) {
+	
+	@Test
+	public void validarAddUsuario() {
 		System.setProperty("webdriver.chrome.driver","D:\\Alura\\chromedriver\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
 		
-		WebDriver driver2 = new ChromeDriver();
+		// acessa o site do leilão
+		driver.get("http://localhost:8080/usuarios/new");
 		
-		// acessa o site do google
-		driver2.get("http://localhost:8080/usuarios/new");
-				
-		// digita no campo "q" do google
-		WebElement campoDeTexto2 = driver2.findElement(By.name("q"));
-		campoDeTexto2.sendKeys("Caelum");
+		WebElement nome = driver.findElement(By.name("usuario.nome"));
+		WebElement email = driver.findElement(By.name("usuario.email"));
+		
+		nome.sendKeys("Usuario 1 Nome");
+		email.sendKeys("usuario1@com.com.br");
 		
 		// submete o form
-		campoDeTexto2.submit();
+		WebElement botaoSalvar = driver.findElement(By.id("btnSalvar"));
+		botaoSalvar.click();
+		
+		//Garantir que o user foi inserido
+		boolean achouNome =  driver.getPageSource().contains("Usuario 1 Nome");
+		boolean achouemail =  driver.getPageSource().contains("usuario1@com.com.br");
+		
+		assertTrue(achouNome);	
+		assertTrue(achouemail);	
+		
+		driver.close();
+			
 	}
 
+	
 }
