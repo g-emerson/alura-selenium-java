@@ -39,5 +39,25 @@ public class UsuarioSystemTest {
 			
 	}
 
-	
+	@Test
+	public void validarAddUsuarioNomeObrigatorio() {
+		System.setProperty("webdriver.chrome.driver","D:\\Alura\\chromedriver\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		
+		// acessa o site do leilão
+		driver.get("http://localhost:8080/usuarios/new");
+		
+		//WebElement nome = driver.findElement(By.name("usuario.nome"));
+		WebElement email = driver.findElement(By.name("usuario.email"));
+		WebElement botaoSalvar = driver.findElement(By.id("btnSalvar"));
+		
+		email.sendKeys("usuario2@com.com.br");
+		botaoSalvar.click();
+		
+		//Garantir que o user foi inserido
+		assertTrue(driver.getPageSource().contains("Nome obrigatorio!"));
+
+        driver.close();
+	}
+
 }
