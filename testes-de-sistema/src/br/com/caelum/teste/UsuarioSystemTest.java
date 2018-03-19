@@ -47,17 +47,49 @@ public class UsuarioSystemTest {
 		// acessa o site do leilão
 		driver.get("http://localhost:8080/usuarios/new");
 		
-		//WebElement nome = driver.findElement(By.name("usuario.nome"));
 		WebElement email = driver.findElement(By.name("usuario.email"));
 		WebElement botaoSalvar = driver.findElement(By.id("btnSalvar"));
 		
 		email.sendKeys("usuario2@com.com.br");
 		botaoSalvar.click();
 		
-		//Garantir que o user foi inserido
+		//Garantir a mensagem apareceu
 		assertTrue(driver.getPageSource().contains("Nome obrigatorio!"));
 
         driver.close();
 	}
+	
+	@Test
+	public void validarAddUsuarioEmailObrigatorio() {
+		System.setProperty("webdriver.chrome.driver","D:\\Alura\\chromedriver\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("http://localhost:8080/usuarios/new");
+		
+		WebElement nome = driver.findElement(By.name("usuario.nome"));
+		WebElement botaoSalvar = driver.findElement(By.id("btnSalvar"));
+		
+		nome.sendKeys("Usuario 3 Nome");
+		botaoSalvar.click();
 
+		//Garantir a mensagem apareceu
+		assertTrue(driver.getPageSource().contains("E-mail obrigatorio!"));
+
+        driver.close();
+	}
+
+	@Test
+    public void validarAddUsuarioNomeEmailObrigatorio() {
+		System.setProperty("webdriver.chrome.driver","D:\\Alura\\chromedriver\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("http://localhost:8080/usuarios/new");
+		
+        WebElement email = driver.findElement(By.name("usuario.email"));
+        email.submit();
+
+        assertTrue(driver.getPageSource().contains("Nome obrigatorio!"));
+        assertTrue(driver.getPageSource().contains("E-mail obrigatorio!"));
+
+        driver.close();
+
+    }
 }
