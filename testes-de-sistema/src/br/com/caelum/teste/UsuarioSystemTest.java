@@ -11,10 +11,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class UsuarioSystemTest {
- private WebDriver driver;
+	private WebDriver driver;
 
-	    @Before
-	    public void inicializa() {
+	@Before
+	public void inicializa() {
 	    	 
 	    	System.setProperty("webdriver.gecko.driver", "D:\\Alura\\geckodriver-v0.20.0-win64\\geckodriver.exe");
 	        driver = new FirefoxDriver();
@@ -78,6 +78,7 @@ public class UsuarioSystemTest {
     public void validarAddUsuarioNomeEmailObrigatorio() {
 		driver.get("http://localhost:8080/usuarios/new");
 		
+		WebElement nome = driver.findElement(By.name("usuario.nome"));
         WebElement email = driver.findElement(By.name("usuario.email"));
         email.submit();
 
@@ -87,8 +88,25 @@ public class UsuarioSystemTest {
   
     }
 	
-	 @After
-	    public void encerra() {
+	@Test
+	public void navegarLink() {
+	        driver.get("http://localhost:8080/usuarios");
+	        WebElement ligacao = driver.findElement(By.linkText("Novo Usuário"));
+	        ligacao.click();        
+
+	        //garantir que abriu pagina de inclusao
+	        boolean achouCampoNome = driver.getPageSource().contains("Nome:");
+	        boolean achouCampoEmail = driver.getPageSource().contains("E-mail:");
+
+	        assertTrue(achouCampoNome);
+	        assertTrue(achouCampoEmail);
+
+	}
+	
+	
+	
+	@After
+	public void encerra() {
 	        driver.close();
 	    }
 }
