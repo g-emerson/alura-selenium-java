@@ -2,20 +2,26 @@ package br.com.caelum.teste;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class UsuarioSystemTest {
-	
-	@Test
+ private WebDriver driver;
+
+	    @Before
+	    public void inicializa() {
+	    	 
+	    	System.setProperty("webdriver.gecko.driver", "D:\\Alura\\geckodriver-v0.20.0-win64\\geckodriver.exe");
+	        driver = new FirefoxDriver();
+	    }
+
+	    @Test	
 	public void validarAddUsuario() {
-		System.setProperty("webdriver.chrome.driver","D:\\Alura\\chromedriver\\chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
-		
-		// acessa o site do leilão
 		driver.get("http://localhost:8080/usuarios/new");
 		
 		WebElement nome = driver.findElement(By.name("usuario.nome"));
@@ -34,17 +40,12 @@ public class UsuarioSystemTest {
 		
 		assertTrue(achouNome);	
 		assertTrue(achouemail);	
-		
-		driver.close();
+
 			
 	}
 
 	@Test
 	public void validarAddUsuarioNomeObrigatorio() {
-		System.setProperty("webdriver.chrome.driver","D:\\Alura\\chromedriver\\chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
-		
-		// acessa o site do leilão
 		driver.get("http://localhost:8080/usuarios/new");
 		
 		WebElement email = driver.findElement(By.name("usuario.email"));
@@ -56,13 +57,10 @@ public class UsuarioSystemTest {
 		//Garantir a mensagem apareceu
 		assertTrue(driver.getPageSource().contains("Nome obrigatorio!"));
 
-        driver.close();
 	}
 	
 	@Test
 	public void validarAddUsuarioEmailObrigatorio() {
-		System.setProperty("webdriver.chrome.driver","D:\\Alura\\chromedriver\\chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
 		driver.get("http://localhost:8080/usuarios/new");
 		
 		WebElement nome = driver.findElement(By.name("usuario.nome"));
@@ -74,13 +72,10 @@ public class UsuarioSystemTest {
 		//Garantir a mensagem apareceu
 		assertTrue(driver.getPageSource().contains("E-mail obrigatorio!"));
 
-        driver.close();
 	}
 
 	@Test
     public void validarAddUsuarioNomeEmailObrigatorio() {
-		System.setProperty("webdriver.chrome.driver","D:\\Alura\\chromedriver\\chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
 		driver.get("http://localhost:8080/usuarios/new");
 		
         WebElement email = driver.findElement(By.name("usuario.email"));
@@ -89,7 +84,11 @@ public class UsuarioSystemTest {
         assertTrue(driver.getPageSource().contains("Nome obrigatorio!"));
         assertTrue(driver.getPageSource().contains("E-mail obrigatorio!"));
 
-        driver.close();
-
+  
     }
+	
+	 @After
+	    public void encerra() {
+	        driver.close();
+	    }
 }
