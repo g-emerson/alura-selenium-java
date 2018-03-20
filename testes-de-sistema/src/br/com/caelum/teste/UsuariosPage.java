@@ -1,5 +1,6 @@
 package br.com.caelum.teste;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -26,6 +27,16 @@ public class UsuariosPage {
 		// verifica se ambos existem na listagem
 		return driver.getPageSource().contains(nome) && 
 				driver.getPageSource().contains(email);
+	}
+	
+	public void apagarUsuario(int posicao) {
+		//int posicao = 1; // queremos o 1o botao da pagina
+		driver.findElements(By.tagName("button")).get(posicao-1).click();
+		
+		// pega o alert que está aberto
+		Alert alert = driver.switchTo().alert();
+		// confirma
+		alert.accept();
 	}
 
 }

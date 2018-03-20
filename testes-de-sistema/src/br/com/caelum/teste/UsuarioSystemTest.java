@@ -1,5 +1,6 @@
 package br.com.caelum.teste;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.After;
@@ -32,6 +33,20 @@ public class UsuarioSystemTest {
         assertTrue(usuarios.existeNaListagem("Ronaldo Luiz de Albuquerque", "ronaldo2009@terra.com.br"));
 
     }
+    
+    @Test
+    public void deveExcluirUsuario() {
+        usuarios.visita();
+        usuarios.novo().cadastra("Usuario Excluir", "apagar@apa.gar");
+
+        assertTrue(usuarios.existeNaListagem("Usuario Excluir", "apagar@apa.gar"));
+        
+        usuarios.apagarUsuario(1);
+        assertFalse(usuarios.existeNaListagem("Usuario Excluir", "apagar@apa.gar"));        
+
+    }
+    
+    
 
     @After
     public void encerra() {
