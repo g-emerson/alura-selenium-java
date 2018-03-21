@@ -39,9 +39,10 @@ public class UsuariosPage {
 		alert.accept();
 	}
 	
-	public void editaUsuario(int posicao) {
-		//int posicao = 1; // 1o link de editar que aparecer
+	public EditarUsuarioPage editaUsuario(int posicao) {
 		driver.findElements(By.linkText("editar")).get(posicao-1).click();
+		
+		return new EditarUsuarioPage(driver);
 	}
 
 }

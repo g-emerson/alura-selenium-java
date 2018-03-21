@@ -46,6 +46,18 @@ public class UsuarioSystemTest {
 
     }
     
+    @Test
+    public void deveEditarrUsuario() {
+        usuarios.visita();
+        usuarios.novo().cadastra("Usuario Editar", "editar@edi.tar");
+
+        assertTrue(usuarios.existeNaListagem("Usuario Editar", "editar@edi.tar"));
+        
+        
+        usuarios.editaUsuario(1).editar("Usuario Editado", "editado@edita.do");
+        assertFalse(usuarios.existeNaListagem("Usuario Editar", "editar@edi.tar"));
+        assertTrue(usuarios.existeNaListagem("Usuario Editado", "editado@edita.do"));     
+    }
     
 
     @After
