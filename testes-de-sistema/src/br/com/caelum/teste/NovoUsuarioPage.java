@@ -20,6 +20,16 @@ public class NovoUsuarioPage {
         txtEmail.sendKeys(email);
 
         txtNome.submit();
-
     }
+    
+    public void edita(String nome, String email) {
+        WebElement txtNome = driver.findElement(By.name("usuario.nome"));
+        WebElement txtEmail = driver.findElement(By.name("usuario.email"));
+
+        txtNome.sendKeys(nome);
+        txtEmail.sendKeys(email);
+
+        txtNome.submit();
+    }
+    
 }

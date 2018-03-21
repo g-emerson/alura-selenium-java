@@ -31,8 +31,28 @@ public class LeiloesSystemTest {
         novoLeilao.preenche("Geladeira", 123, "Paulo Henrique", true);
 
         assertTrue(leiloes.existe("Geladeira", 123, "Paulo Henrique", true));
-
     }
+    
+    @Test
+    public void validaCadastrarUmLeilaoSemNome() {
+
+        leiloes.visita();
+        NovoLeilaoPage novoLeilao = leiloes.novo();
+        novoLeilao.preenche("", 122, "Paulo Henrique", true);
+        
+        assertTrue(driver.getPageSource().contains("Nome obrigatorio!"));
+    }
+    
+    @Test
+    public void validaCadastrarUmLeilaoSemLanceInicial() {
+
+        leiloes.visita();
+        NovoLeilaoPage novoLeilao = leiloes.novo();
+        novoLeilao.preenche("Teste", 0, "Paulo Henrique", true);
+
+        assertTrue(driver.getPageSource().contains("Valor inicial deve ser maior que zero!"));
+    }
+    
     
     @After
     public void encerra() {
