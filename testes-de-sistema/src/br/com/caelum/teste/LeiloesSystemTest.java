@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-
 public class LeiloesSystemTest {
 	private WebDriver driver;
     private LeiloesPage leiloes;
@@ -52,8 +51,7 @@ public class LeiloesSystemTest {
         novoLeilao.preenche("Teste", 0, "Paulo Henrique", true);
 
         assertTrue(driver.getPageSource().contains("Valor inicial deve ser maior que zero!"));
-    }
-    
+    }    
     
     @After
     public void encerra() {

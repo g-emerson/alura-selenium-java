@@ -24,5 +24,4 @@ public class CriadorDeCenarios {
 
         return this;
     }
-
 }

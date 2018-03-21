@@ -32,7 +32,6 @@ public class UsuarioSystemTest {
         usuarios.novo().cadastra("Ronaldo Luiz de Albuquerque", "ronaldo2009@terra.com.br");
 
         assertTrue(usuarios.existeNaListagem("Ronaldo Luiz de Albuquerque", "ronaldo2009@terra.com.br"));
-
     }
     
     @Test
@@ -43,8 +42,7 @@ public class UsuarioSystemTest {
         assertTrue(usuarios.existeNaListagem("Usuario Excluir", "apagar@apa.gar"));
         
         usuarios.apagarUsuario(1);
-        assertFalse(usuarios.existeNaListagem("Usuario Excluir", "apagar@apa.gar"));        
-
+        assertFalse(usuarios.existeNaListagem("Usuario Excluir", "apagar@apa.gar"));  
     }
     
     @Test
@@ -52,14 +50,12 @@ public class UsuarioSystemTest {
         usuarios.visita();
         usuarios.novo().cadastra("Usuario Editar", "editar@edi.tar");
 
-        assertTrue(usuarios.existeNaListagem("Usuario Editar", "editar@edi.tar"));
-        
+        assertTrue(usuarios.existeNaListagem("Usuario Editar", "editar@edi.tar"));        
         
         usuarios.editaUsuario(1).editar("Usuario Editado", "editado@edita.do");
         assertFalse(usuarios.existeNaListagem("Usuario Editar", "editar@edi.tar"));
         assertTrue(usuarios.existeNaListagem("Usuario Editado", "editado@edita.do"));     
-    }
-    
+    }    
 
     @After
     public void encerra() {

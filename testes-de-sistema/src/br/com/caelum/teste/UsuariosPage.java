@@ -44,5 +44,4 @@ public class UsuariosPage {
 		
 		return new EditarUsuarioPage(driver);
 	}
-
 }

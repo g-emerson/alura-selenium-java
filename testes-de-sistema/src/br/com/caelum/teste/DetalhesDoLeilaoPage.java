@@ -1,7 +1,5 @@
 package br.com.caelum.teste;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,13 +26,9 @@ public class DetalhesDoLeilaoPage {
 	    }
 	    
 	    public boolean existeLance(String usuario, double valor) {
-	        Boolean temUsuario =
-	                new WebDriverWait(driver, 10)
-	                    .until(ExpectedConditions.textToBePresentInElement(By.id("lancesDados"), usuario));
+	        Boolean temUsuario = new WebDriverWait(driver, 10).until(ExpectedConditions.textToBePresentInElement(By.id("lancesDados"), usuario));
 	        
 	        if(temUsuario) return driver.getPageSource().contains(String.valueOf(valor));
 	        return false;
 	    }
-	    
-	    
 }
