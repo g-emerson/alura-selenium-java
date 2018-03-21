@@ -22,6 +22,7 @@ public class UsuarioSystemTest {
         //Abrindo pelo Chrome
         System.setProperty("webdriver.chrome.driver","D:\\Alura\\chromedriver\\chromedriver.exe");
         this.driver = new ChromeDriver();
+        driver.get("http://localhost:8080/apenas-teste/limpa");
         this.usuarios = new UsuariosPage(driver);
     }
 

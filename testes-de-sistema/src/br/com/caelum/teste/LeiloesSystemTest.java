@@ -17,6 +17,7 @@ public class LeiloesSystemTest {
     public void inicializa() {
     	System.setProperty("webdriver.chrome.driver","D:\\Alura\\chromedriver\\chromedriver.exe");
         this.driver = new ChromeDriver();
+        driver.get("http://localhost:8080/apenas-teste/limpa");
         leiloes = new LeiloesPage(driver);
 
         UsuariosPage usuarios = new UsuariosPage(driver);
